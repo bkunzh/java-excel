@@ -17,9 +17,12 @@ public class JodaTimeTest {
         // Use a Calendar
         java.util.Calendar calendar = Calendar.getInstance();
         DateTime dateTime = new DateTime(calendar);
+        System.out.println(dateTime);
+        System.out.println(dateTime.toString("yyyy-MM-dd hh:mm:ss"));
         // Use another Joda DateTime
         String timeString = "2006-01-26";
         dateTime = new DateTime(timeString);
         System.out.println("dateTime = " + dateTime);
+        System.out.println("dateTime.toString(\"yyyy-MM-dd\") = " + dateTime.toString("yyyy-MM-dd"));
     }
 }
