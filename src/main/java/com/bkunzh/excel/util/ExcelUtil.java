@@ -12,19 +12,17 @@ public class ExcelUtil {
     /**
      * 获取单元格值，包括字符串、数字、布尔、日期、公式等
      * @param cell
-     * @param workbook
      * @return
      */
-    public static Object getCellValue(Cell cell, Workbook workbook) {
+    public static Object getCellValue(Cell cell) {
         Object rs = null;
-        FormulaEvaluator formulaEvaluator = workbook.getCreationHelper().createFormulaEvaluator();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         switch (cell.getCellTypeEnum()) {
             case STRING:
                 rs = cell.getStringCellValue();
                 break;
             case NUMERIC: // 数字或日期
                 if (HSSFDateUtil.isCellDateFormatted(cell)) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                     rs = sdf.format(cell.getDateCellValue());
                 } else {
                     rs = cell.getNumericCellValue();
@@ -35,6 +33,8 @@ public class ExcelUtil {
                 break;
             case FORMULA: // 公式
 //                String cellFormula = cell.getCellFormula();
+                Workbook workbook = cell.getRow().getSheet().getWorkbook();
+                FormulaEvaluator formulaEvaluator = workbook.getCreationHelper().createFormulaEvaluator();
                 CellValue cellValue = formulaEvaluator.evaluate(cell);
                 rs = cellValue.formatAsString();
                 break;

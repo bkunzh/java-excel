@@ -21,7 +21,7 @@ public class ExcelReadTest {
         Row rowTitle = sheet0.getRow(0);
         Cell cell = rowTitle.getCell(0);
 //        System.out.println(cell.getStringCellValue());
-        System.out.println(ExcelUtil.getCellValue(cell, workbook));
+        System.out.println(ExcelUtil.getCellValue(cell));
         in.close();
     }
 
@@ -68,7 +68,7 @@ public class ExcelReadTest {
             for (int cellNum = 0; cellNum < rowTitle.getPhysicalNumberOfCells(); cellNum++) {
                 System.out.printf("[" + cellNum + "]");
                 Cell cell = rowData.getCell(cellNum);
-                System.out.printf(ExcelUtil.getCellValue(cell, workbook) + "  ");
+                System.out.printf(ExcelUtil.getCellValue(cell) + "  ");
             }
             System.out.println();
         }
